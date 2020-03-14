@@ -1,4 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
 button {
-  background: linear-gradient(#daff00, #ff0000);
+  background: linear-gradient(#666666, #eee);
   padding: 10px;
+  flex: 1 1 100%;
+  touch-action: manipulation;
+  border: 1px solid #bbb;
+}
+
+#luke {
+  margin-left: 1rem;
+}
+
+#reset {
+  position: absolute;
 }
