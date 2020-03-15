@@ -4,21 +4,33 @@ import domz from "https://unpkg.com/domz";
 const { body, button, h1, p } = domz(h);
 
 const initial_state = {
-  luke: localStorage.getItem("luke_score") || 12,
-  iris: localStorage.getItem("iris_score") || 15,
+  luke: 12,
+  iris: 15,
 };
 
 // These are "actions" (or update functions) they take
 // the old state and return a new state
 
-const reset = () => initial_state;
-const increment = name => state => ({
-  ...state,
-  [name]: parseInt(state[name]) + 1,
-});
+const reset = () => {
+  localStorage.setItem("luke_score", initial_state.luke);
+  localStorage.setItem("iris_score", initial_state.iris);
+  return initial_state;
+};
+
+const increment = name => state => {
+  const new_score = parseInt(state[name]) + 1;
+  localStorage.setItem(name + "_score", new_score);
+  return {
+    ...state,
+    [name]: new_score,
+  };
+};
 
 app({
-  init: initial_state,
+  init: {
+    luke: localStorage.getItem("luke_score") || initial_state.luke,
+    iris: localStorage.getItem("iris_score") || initial_state.iris,
+  },
   view: state =>
     body([
       button({ id: "iris", onclick: increment("iris") }, [
